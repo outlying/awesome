@@ -19,23 +19,7 @@ public final class LogFileFragment extends BaseFragment {
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState ) {
 
-
+        // TODO load log data
     }
 
-    /**
-     *
-     *
-     * @throws IOException
-     */
-    private void readLogFile() throws IOException {
-
-        InputStream inputStream = getResources().openRawResource( R.raw.varnish );
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        String line = reader.readLine();
-
-        while (line != null) {
-
-
-        }
-    }
 }
