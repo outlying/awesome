@@ -1,7 +1,5 @@
 package com.antyzero.awesome.domain.log;
 
-import com.sun.corba.se.spi.orbutil.fsm.Input;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

@@ -13,7 +13,7 @@ final class Entry {
      *
      * @param logLine single line
      */
-    public Entry( String logLine ) {
+    Entry( String logLine ) {
 
 
     }

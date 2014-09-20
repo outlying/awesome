@@ -4,8 +4,6 @@ import org.junit.Test;
 
 import java.io.InputStream;
 
-import static org.junit.Assert.*;
-
 public class LogParserTest {
 
     @Test
@@ -13,7 +11,7 @@ public class LogParserTest {
 
         InputStream inputStream = Thread.currentThread()
                 .getContextClassLoader()
-                .getResourceAsStream("/varnish.log");
+                .getResourceAsStream( "/com/antyzero/awesome/domain/log/varnish.log" );
 
         LogParser.read( inputStream );
     }
