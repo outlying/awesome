@@ -1,4 +1,4 @@
-package com.antyzero.awesome.ui;
+package com.antyzero.awesome.ui.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -108,11 +108,11 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
      */
     public enum Tabs {
 
-        LOG( LogFileFragment.class, R.string.title_section1 ),
+        LOG( LogFileFragment.class, R.string.main_navigation_tab_log ),
 
-        RSS( RssFragment.class, R.string.title_section2 ),
+        RSS( RssFragment.class, R.string.main_navigation_tab_rss ),
 
-        JSON( JsonFragment.class, R.string.title_section3 );
+        JSON( JsonFragment.class, R.string.main_navigation_tab_json );
 
 
         private final Class<? extends BaseFragment> fragmentClass;
