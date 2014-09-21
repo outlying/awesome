@@ -30,6 +30,17 @@ android {
 }
 
 dependencies {
+
+    // Internal dependencies
+
+    def domainLayer = project(':domain')
+
+    compile domainLayer
+
+    // External dependencies
+
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.3'
+    compile 'com.octo.android.robospice:robospice-spring-android:1.4.12'
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v13:20.0.0'
 }
