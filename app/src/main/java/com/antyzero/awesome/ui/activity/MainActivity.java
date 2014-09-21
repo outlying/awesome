@@ -84,7 +84,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     }
 
     /**
-     *
+     * Tabs adapter
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 

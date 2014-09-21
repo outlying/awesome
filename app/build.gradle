@@ -55,4 +55,8 @@ dependencies {
     compile 'com.octo.android.robospice:robospice-spring-android:1.4.12'
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Testing
+
+    androidTestCompile 'com.squareup:fest-android:1.0.7'
 }

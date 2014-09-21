@@ -8,7 +8,7 @@ import java.net.URI;
 /**
  * Get JSON feed
  */
-public class JsonRequest  extends SpringAndroidSpiceRequest<JsonResponse> {
+public class JsonRequest extends SpringAndroidSpiceRequest<JsonResponse> {
 
     private static final URI url = URI.create( "http://rexxars.com/playground/testfeed/" );
 
