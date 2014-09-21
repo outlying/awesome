@@ -8,6 +8,7 @@ import com.octo.android.robospice.persistence.exception.CacheCreationException;
 import com.octo.android.robospice.persistence.springandroid.json.jackson.JacksonObjectPersisterFactory;
 
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,7 +34,7 @@ public class AwesomeSpiceService extends SpringAndroidSpiceService {
         RestTemplate restTemplate = new RestTemplate();
 
 
-        MappingJacksonHttpMessageConverter jsonConverter = new MappingJacksonHttpMessageConverter();
+        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
         // TODO add atom/rss converter
 
         final List<HttpMessageConverter<?>> listHttpMessageConverters = restTemplate.getMessageConverters();

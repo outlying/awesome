@@ -23,7 +23,7 @@ public class LogParser {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line = reader.readLine();
 
-        List<Entry> logEntries = new ArrayList<Entry>(  );
+        List<Entry> logEntries = new ArrayList<>();
 
         while (line != null) {
             logEntries.add( new Entry( line ) );
