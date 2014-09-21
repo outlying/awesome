@@ -11,7 +11,7 @@ public class LogParserTest {
 
         InputStream inputStream = Thread.currentThread()
                 .getContextClassLoader()
-                .getResourceAsStream( "varnish.log" );
+                .getResourceAsStream( "/varnish.log" );
 
         LogParser.read( inputStream );
     }

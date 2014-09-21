@@ -11,6 +11,9 @@ public class EntryTest {
     @Test
     public void testEntryCreation() throws IOException {
 
+        System.out.println(EntryTest.class.getResource(".").getPath());
+        System.out.println(EntryTest.class.getResource("singleline.log").getPath());
+
         InputStream inputStream = this.getClass()
                 .getResourceAsStream( "singleline.log" );
 
