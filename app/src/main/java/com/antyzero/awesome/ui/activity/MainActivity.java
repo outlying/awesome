@@ -32,6 +32,11 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         setContentView( R.layout.activity_main );
 
         final ActionBar actionBar = getActionBar();
+
+        if( actionBar == null ) {
+            throw new IllegalStateException( "Theme used for activity does not contain ActionBar" );
+        }
+
         actionBar.setNavigationMode( ActionBar.NAVIGATION_MODE_TABS );
 
         mSectionsPagerAdapter = new SectionsPagerAdapter( getFragmentManager() );

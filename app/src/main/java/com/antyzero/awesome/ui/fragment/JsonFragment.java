@@ -17,7 +17,7 @@ public final class JsonFragment extends BaseFragment {
 
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
-        return inflater.inflate( R.layout.fragment_json, container );
+        return inflater.inflate( R.layout.fragment_json, container, false );
     }
 
     @Override
