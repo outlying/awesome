@@ -18,7 +18,7 @@ public class LogParser {
      *
      * @throws java.io.IOException
      */
-    public static void read(InputStream inputStream) throws IOException {
+    public static List<Entry> read( InputStream inputStream ) throws IOException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line = reader.readLine();
@@ -28,5 +28,7 @@ public class LogParser {
         while (line != null) {
             logEntries.add( new Entry( line ) );
         }
+
+        return logEntries;
     }
 }
