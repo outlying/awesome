@@ -1,10 +1,13 @@
 package com.antyzero.awesome.ui.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -24,11 +27,11 @@ import java.util.List;
 /**
  * ...
  */
-public final class JsonFragment extends BaseFragment {
+public final class JsonFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
     private ListView listView;
 
-    private BaseAdapter jsonAdapter;
+    private JsonAdapter jsonAdapter;
 
     private final Entries entries = new Entries();
 
@@ -59,6 +62,7 @@ public final class JsonFragment extends BaseFragment {
         listView = (ListView) view.findViewById( R.id.listView );
 
         listView.setAdapter( jsonAdapter );
+        listView.setOnItemClickListener(this);
     }
 
     /**
@@ -73,6 +77,20 @@ public final class JsonFragment extends BaseFragment {
                 JsonRequest.URL,
                 JsonRequest.CACHE_EXPIRY_DURATION,
                 new JsonRequestListener());
+    }
+
+    /**
+     * Response to ListView item click
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Entry entry = jsonAdapter.getItem(position);
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(entry.getLink()));
+        startActivity(browserIntent);
     }
 
     /**
