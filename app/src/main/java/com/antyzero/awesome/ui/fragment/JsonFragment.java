@@ -8,11 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.antyzero.awesome.Constants;
 import com.antyzero.awesome.R;
 import com.antyzero.awesome.network.request.JsonRequest;
 import com.antyzero.awesome.network.response.JsonResponse;
@@ -90,7 +88,12 @@ public final class JsonFragment extends BaseFragment implements AdapterView.OnIt
         Entry entry = jsonAdapter.getItem(position);
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(entry.getLink()));
-        startActivity(browserIntent);
+
+        if (browserIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(browserIntent);
+        } else {
+            Toast.makeText(getActivity(), R.string.error_missing_application_web, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
