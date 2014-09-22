@@ -6,5 +6,6 @@
     <string name="main_navigation_tab_log">Log</string>
     <string name="main_navigation_tab_rss">RSS</string>
     <string name="main_navigation_tab_json">JSON</string>
+    <string name="request_failure_json">Unable to downoad JSON feed</string>
 
 </resources>

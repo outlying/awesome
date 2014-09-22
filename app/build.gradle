@@ -1,25 +1,81 @@
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
+    }
+}
+
+apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 20
+    compileSdkVersion 19
     buildToolsVersion "20.0.0"
 
     defaultConfig {
         applicationId "com.antyzero.awesome"
         minSdkVersion 16
-        targetSdkVersion 20
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+        }
+    }
+
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    packagingOptions {
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Internal dependencies
+
+    def domainLayer = project(':domain')
+
+    compile domainLayer
+
+    // External dependencies
+
     compile 'com.android.support:support-v13:20.0.0'
+    compile 'com.android.support:support-annotations:20.0.0'
+
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.2'
+    compile 'com.octo.android.robospice:robospice-spring-android:1.4.14'
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Testing
+
+    androidTestCompile 'com.squareup:fest-android:1.0.7'
 }
