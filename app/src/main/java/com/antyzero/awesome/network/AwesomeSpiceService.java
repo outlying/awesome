@@ -6,6 +6,7 @@ import com.octo.android.robospice.SpringAndroidSpiceService;
 import com.octo.android.robospice.persistence.CacheManager;
 import com.octo.android.robospice.persistence.exception.CacheCreationException;
 import com.octo.android.robospice.persistence.springandroid.json.jackson.JacksonObjectPersisterFactory;
+import com.octo.android.robospice.persistence.springandroid.json.jackson2.Jackson2ObjectPersisterFactory;
 
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -23,7 +24,7 @@ public class AwesomeSpiceService extends SpringAndroidSpiceService {
     public CacheManager createCacheManager(Application application) throws CacheCreationException {
 
         CacheManager cacheManager = new CacheManager();
-        cacheManager.addPersister(new JacksonObjectPersisterFactory(application));
+        cacheManager.addPersister(new Jackson2ObjectPersisterFactory(application));
 
         return cacheManager;
     }
