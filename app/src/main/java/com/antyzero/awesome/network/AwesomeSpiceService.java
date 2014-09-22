@@ -33,7 +33,6 @@ public class AwesomeSpiceService extends SpringAndroidSpiceService {
 
         RestTemplate restTemplate = new RestTemplate();
 
-
         MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
         // TODO add atom/rss converter
 

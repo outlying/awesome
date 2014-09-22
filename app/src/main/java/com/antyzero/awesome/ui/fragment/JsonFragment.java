@@ -68,10 +68,14 @@ public final class JsonFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
 
-        getSpiceManager().getFromCacheAndLoadFromNetworkIfExpired(
+        /*getSpiceManager().getFromCacheAndLoadFromNetworkIfExpired(
                 new JsonRequest(),
                 JsonRequest.URL,
                 JsonRequest.CACHE_EXPIRY_DURATION,
+                new JsonRequestListener());*/
+
+        getSpiceManager().execute(
+                new JsonRequest(),
                 new JsonRequestListener());
     }
 
