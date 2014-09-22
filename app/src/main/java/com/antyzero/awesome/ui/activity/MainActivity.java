@@ -6,6 +6,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
@@ -22,6 +24,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private ActionBar actionBar;
 
     /**
      * {@inheritDoc}
@@ -31,7 +34,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
 
-        final ActionBar actionBar = getActionBar();
+        actionBar = getActionBar();
 
         if( actionBar == null ) {
             throw new IllegalStateException( "Theme used for activity does not contain ActionBar" );
@@ -43,13 +46,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
         mViewPager = (ViewPager) findViewById( R.id.pager );
         mViewPager.setAdapter( mSectionsPagerAdapter );
-
-        mViewPager.setOnPageChangeListener( new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected( int position ) {
-                actionBar.setSelectedNavigationItem( position );
-            }
-        } );
+        mViewPager.setOnPageChangeListener( new OnPageChangeListener() );
 
         for( int i = 0; i < mSectionsPagerAdapter.getCount(); i++ ) {
 
@@ -84,9 +81,20 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     }
 
     /**
+     * Listen to page change state
+     */
+    private final class OnPageChangeListener extends ViewPager.SimpleOnPageChangeListener {
+
+        @Override
+        public void onPageSelected( int position ) {
+            actionBar.setSelectedNavigationItem( position );
+        }
+    }
+
+    /**
      * Tabs adapter
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    private final class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter( FragmentManager fragmentManager ) {
             super( fragmentManager );
@@ -109,7 +117,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     }
 
     /**
-     * Holds tab order, class, title
+     * Holds tab order, fragment class, title
      */
     public enum Tabs {
 
@@ -130,7 +138,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
          * @param fragmentClass for tab fragment creation
          * @param resourceTitle fot tab title
          */
-        Tabs( Class<? extends BaseFragment> fragmentClass, int resourceTitle ) {
+        Tabs( @NonNull Class<? extends BaseFragment> fragmentClass, @StringRes int resourceTitle ) {
+
             this.fragmentClass = fragmentClass;
             this.resourceTitle = resourceTitle;
         }
