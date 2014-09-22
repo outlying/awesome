@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.antyzero.awesome.Constants;
 import com.antyzero.awesome.R;
 import com.antyzero.awesome.network.request.JsonRequest;
 import com.antyzero.awesome.network.response.JsonResponse;
@@ -30,6 +32,9 @@ public final class JsonFragment extends BaseFragment {
 
     private final Entries entries = new Entries();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onAttach( Activity activity ) {
         super.onAttach( activity );
@@ -37,11 +42,17 @@ public final class JsonFragment extends BaseFragment {
         jsonAdapter = new JsonAdapter( activity, entries );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         return inflater.inflate( R.layout.fragment_json, container, false );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState ) {
 
@@ -50,14 +61,18 @@ public final class JsonFragment extends BaseFragment {
         listView.setAdapter( jsonAdapter );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onStart() {
         super.onStart();
 
-        getSpiceManager().execute(
+        getSpiceManager().getFromCacheAndLoadFromNetworkIfExpired(
                 new JsonRequest(),
-                new JsonRequestListener()
-        );
+                JsonRequest.URL,
+                JsonRequest.CACHE_EXPIRY_DURATION,
+                new JsonRequestListener());
     }
 
     /**
@@ -77,13 +92,13 @@ public final class JsonFragment extends BaseFragment {
     }
 
     /**
-     *
+     * Wait for server response
      */
     private class JsonRequestListener implements RequestListener<JsonResponse> {
 
         @Override
         public void onRequestFailure( SpiceException spiceException ) {
-            // TODO report problem
+            Toast.makeText(getActivity(),R.string.request_failure_json, Toast.LENGTH_SHORT).show();
         }
 
         @Override

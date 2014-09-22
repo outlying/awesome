@@ -5,16 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
+import com.antyzero.awesome.R;
 import com.antyzero.awesome.network.response.pojo.Entries;
 import com.antyzero.awesome.network.response.pojo.Entry;
 
 /**
- * Created by tornax on 21.09.14.
+ * Adapter for JSON data feed items
  */
 public class JsonAdapter extends BaseAdapter {
 
     private final LayoutInflater layoutInflater;
+
     private final Entries entries;
 
     public JsonAdapter( Context context, Entries entries ) {
@@ -40,8 +43,36 @@ public class JsonAdapter extends BaseAdapter {
     @Override
     public View getView( int position, View convertView, ViewGroup parent ) {
 
-        // TODO views
+        ViewHolder viewHolder;
 
-        return null;
+        if(convertView == null){
+
+            convertView = layoutInflater.inflate(R.layout.adapter_json, parent, false);
+
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else {
+
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        Entry entry = getItem(position);
+
+        viewHolder.textViewTitle.setText(entry.getTitle());
+
+        return convertView;
+    }
+
+    /**
+     * ViewHolder pattern
+     */
+    private static final class ViewHolder {
+
+        private final TextView textViewTitle;
+
+        public ViewHolder(View view) {
+
+            textViewTitle = (TextView) view.findViewById(R.id.textViewTitle);
+        }
     }
 }

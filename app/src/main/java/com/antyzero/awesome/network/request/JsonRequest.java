@@ -10,7 +10,9 @@ import java.net.URI;
  */
 public class JsonRequest extends SpringAndroidSpiceRequest<JsonResponse> {
 
-    private static final URI url = URI.create( "http://rexxars.com/playground/testfeed/" );
+    public static final URI URL = URI.create( "http://rexxars.com/playground/testfeed/" );
+
+    public static final long CACHE_EXPIRY_DURATION = 60_000l;
 
     public JsonRequest() {
         super( JsonResponse.class );
@@ -18,6 +20,6 @@ public class JsonRequest extends SpringAndroidSpiceRequest<JsonResponse> {
 
     @Override
     public JsonResponse loadDataFromNetwork() throws Exception {
-        return getRestTemplate().getForObject( url, getResultType() );
+        return getRestTemplate().getForObject(URL, getResultType() );
     }
 }
