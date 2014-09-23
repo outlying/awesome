@@ -39,6 +39,16 @@ public abstract class ListViewFragment extends BaseFragment {
         containerLoader = view.findViewById( R.id.containerLoader );
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Sometimes, on fast page switching, loading persists even if list is not empty
+        if(listView.getAdapter() != null && listView.getAdapter().getCount() > 0 ){
+            hideLoading();
+        }
+    }
+
     /**
      * Hide loading and assign view to show when ListView is empty
      */
