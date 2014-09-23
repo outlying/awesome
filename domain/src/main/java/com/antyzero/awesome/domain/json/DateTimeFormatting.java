@@ -18,5 +18,5 @@ public final class DateTimeFormatting {
             DateTimeFormat.forPattern( "d MMMM yyyy" ).withLocale( Constants.LOCALE_NORWAY );
 
     public static final DateTimeFormatter TIME =
-            DateTimeFormat.forPattern( "HH:mm" );
+            DateTimeFormat.forPattern( "HH:mm" ).withLocale( Constants.LOCALE_NORWAY );
 }

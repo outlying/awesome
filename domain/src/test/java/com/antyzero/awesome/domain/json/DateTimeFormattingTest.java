@@ -1,5 +1,6 @@
 package com.antyzero.awesome.domain.json;
 
+import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 public class DateTimeFormattingTest {
@@ -7,9 +8,21 @@ public class DateTimeFormattingTest {
     @Test
     public void testDateFormatting(){
 
-        DateTimeFormatting.DATE.parseLocalDate( "29 Mars 2012" );
-        DateTimeFormatting.DATE.parseLocalDate( "18 Januar 2012" );
-        DateTimeFormatting.DATE.parseLocalDate( "13 Februar 2012" );
-        DateTimeFormatting.DATE.parseLocalDate( "7 Mars 2011" );
+        DateTimeFormatter dateFormatter = DateTimeFormatting.DATE;
+
+        dateFormatter.parseLocalDate( "29 mars 2012" );
+        dateFormatter.parseLocalDate( "18 januar 2012" );
+        dateFormatter.parseLocalDate( "13 februar 2012" );
+        dateFormatter.parseLocalDate( "7 mars 2011" );
+    }
+
+    @Test
+    public void testTimeFormatting(){
+
+        DateTimeFormatter timeFormatter = DateTimeFormatting.TIME;
+
+        timeFormatter.parseLocalDate( "00:00" );
+        timeFormatter.parseLocalDate( "23:45" );
+        timeFormatter.parseLocalDate( "9:12" );
     }
 }

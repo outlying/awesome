@@ -97,7 +97,10 @@ public class Entry implements Comparator<Entry> {
     private void deserializerDate( String date ) {
         this.date = date;
 
-        LocalDate localDate = DateTimeFormatting.DATE.parseLocalDate( date );
+        // Forcing lower case for month name, joda does not accept capitals
+        String dateLowerCase = date.toLowerCase( Constants.LOCALE_NORWAY );
+
+        LocalDate localDate = DateTimeFormatting.DATE.parseLocalDate( dateLowerCase );
 
         dateTime.withDate(
                 localDate.getYear(),
@@ -107,7 +110,7 @@ public class Entry implements Comparator<Entry> {
 
     @Override
     public int compare( Entry lhs, Entry rhs ) {
-        return 0;
+        throw new UnsupportedOperationException( "Not yet implemented" );
     }
 
     /**
@@ -116,7 +119,7 @@ public class Entry implements Comparator<Entry> {
     @Override
     public boolean equals( Object o ) {
         if( this == o ) return true;
-        if( o == null || getClass() != o.getClass() ) return false;
+        if( o == null || ((Object) this).getClass() != o.getClass() ) return false;
 
         Entry entry = (Entry) o;
 
