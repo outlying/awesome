@@ -126,7 +126,7 @@ public final class RssFragment extends ListViewFragment implements AdapterView.O
     private static final Comparator<Item> ORDER_DATE_DESC = new Comparator<Item>() {
         @Override
         public int compare( Item lhs, Item rhs ) {
-            return (int) (lhs.getPubDate().getTime() - rhs.getPubDate().getTime());
+            return (int) (rhs.getPubDate().getTime() - lhs.getPubDate().getTime());
         }
     };
 }
