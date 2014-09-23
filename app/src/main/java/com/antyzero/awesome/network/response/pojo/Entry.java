@@ -1,10 +1,16 @@
 package com.antyzero.awesome.network.response.pojo;
 
+import com.antyzero.awesome.domain.Constants;
+import com.antyzero.awesome.domain.json.DateTimeFormatting;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Comparator;
 
@@ -15,7 +21,7 @@ import java.util.Comparator;
 public class Entry implements Comparator<Entry> {
 
     // We will use this for better date-time management
-    private DateTime dateTime = null;
+    private DateTime dateTime = DateTime.now();
 
     @JsonProperty(required = true)
     private String title;
@@ -59,13 +65,44 @@ public class Entry implements Comparator<Entry> {
         return category;
     }
 
-    @JsonCreator
-    @JsonProperty(value = "time")
-    public void deserializeTime( String time ) {
+    public DateTime getDateTime() {
+        return dateTime;
+    }
 
-        if( dateTime == null ) {
-            dateTime = DateTime.now();
-        }
+    /**
+     * Intercept date-time information at de-serialization time to update {@link #dateTime} object
+     *
+     * @param time required for creator
+     */
+    @JsonCreator
+    @JsonProperty( value = "time" )
+    private void deserializerTime( String time ) {
+        this.time = time;
+
+        LocalTime localTime = DateTimeFormatting.TIME.parseLocalTime( time );
+
+        dateTime.withTime(
+                localTime.getHourOfDay(),
+                localTime.getMinuteOfHour(),
+                0, 0 );
+    }
+
+    /**
+     * Intercept date-time information at de-serialization time to update {@link #dateTime} object
+     *
+     * @param date required for creator
+     */
+    @JsonCreator
+    @JsonProperty( value = "date" )
+    private void deserializerDate( String date ) {
+        this.date = date;
+
+        LocalDate localDate = DateTimeFormatting.DATE.parseLocalDate( date );
+
+        dateTime.withDate(
+                localDate.getYear(),
+                localDate.getMonthOfYear(),
+                localDate.getDayOfMonth() );
     }
 
     @Override
