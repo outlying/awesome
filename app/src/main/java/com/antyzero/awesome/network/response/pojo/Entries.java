@@ -15,7 +15,7 @@ public class Entries extends ArrayList<Entry> {
 
         @Override
         public int compare( Entry lhs, Entry rhs ) {
-            return lhs.compareTo( rhs );
+            return lhs.compareTo( rhs ) * -1;
         }
     };
 }

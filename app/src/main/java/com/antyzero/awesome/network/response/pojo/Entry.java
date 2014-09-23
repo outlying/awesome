@@ -83,7 +83,7 @@ public class Entry implements Comparable<Entry> {
 
         LocalTime localTime = DateTimeFormatting.TIME.parseLocalTime( time );
 
-        dateTime.withTime(
+        this.dateTime = dateTime.withTime(
                 localTime.getHourOfDay(),
                 localTime.getMinuteOfHour(),
                 0, 0 );
@@ -104,7 +104,7 @@ public class Entry implements Comparable<Entry> {
 
         LocalDate localDate = DateTimeFormatting.DATE.parseLocalDate( dateLowerCase );
 
-        dateTime.withDate(
+        this.dateTime = dateTime.withDate(
                 localDate.getYear(),
                 localDate.getMonthOfYear(),
                 localDate.getDayOfMonth() );

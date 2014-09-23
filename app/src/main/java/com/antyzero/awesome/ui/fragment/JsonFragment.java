@@ -93,10 +93,10 @@ public final class JsonFragment extends ListViewFragment implements AdapterView.
             return;
         }
 
+        Collections.sort( entryList, Entries.ORDER_DATE_DESC );
+
         entries.clear();
         entries.addAll( entryList );
-
-        Collections.sort( entries, Entries.ORDER_DATE_DESC );
 
         jsonAdapter.notifyDataSetChanged();
     }
