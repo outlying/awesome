@@ -1,13 +1,22 @@
 package com.antyzero.awesome.network.response.pojo;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import org.joda.time.DateTime;
+
+import java.util.Comparator;
 
 /**
  * ...
  */
 @JsonIgnoreProperties( ignoreUnknown = true )
-public class Entry {
+public class Entry implements Comparator<Entry> {
+
+    // We will use this for better date-time management
+    private DateTime dateTime = null;
 
     @JsonProperty( required = true )
     private String title;
@@ -21,8 +30,10 @@ public class Entry {
     @JsonProperty( required = true )
     private String time;
 
+    @JsonProperty
     private String description;
 
+    @JsonProperty
     private String category;
 
     public String getTitle() {
@@ -47,6 +58,20 @@ public class Entry {
 
     public String getCategory() {
         return category;
+    }
+
+    @JsonCreator
+    @JsonProperty( value = "time" )
+    public void deserializeTime( String time ){
+
+        if(dateTime == null){
+            dateTime = DateTime.now();
+        }
+    }
+
+    @Override
+    public int compare(Entry lhs, Entry rhs) {
+        return 0;
     }
 
     /**
