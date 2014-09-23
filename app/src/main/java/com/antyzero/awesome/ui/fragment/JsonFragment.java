@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.antyzero.awesome.R;
+import com.antyzero.awesome.network.ExtendedRequestListener;
 import com.antyzero.awesome.network.request.JsonRequest;
 import com.antyzero.awesome.network.response.JsonResponse;
 import com.antyzero.awesome.network.response.pojo.Entries;
@@ -99,16 +100,21 @@ public final class JsonFragment extends ListViewFragment implements AdapterView.
     /**
      * Wait for server response
      */
-    private class JsonRequestListener implements RequestListener<JsonResponse> {
+    private class JsonRequestListener extends ExtendedRequestListener<JsonResponse> {
 
         @Override
-        public void onRequestFailure( SpiceException spiceException ) {
+        protected void onSuccess( JsonResponse jsonResponse ) {
+            updateUi( jsonResponse );
+        }
+
+        @Override
+        protected void onFailure( SpiceException spiceException ) {
             Toast.makeText( getActivity(), R.string.request_failure_json, Toast.LENGTH_SHORT ).show();
         }
 
         @Override
-        public void onRequestSuccess( JsonResponse jsonResponse ) {
-            updateUi( jsonResponse );
+        public void postResult() {
+            hideLoading();
         }
     }
 }

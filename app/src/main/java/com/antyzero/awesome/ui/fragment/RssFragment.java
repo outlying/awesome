@@ -8,13 +8,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.antyzero.awesome.R;
+import com.antyzero.awesome.network.ExtendedRequestListener;
 import com.antyzero.awesome.network.request.RssRequest;
 import com.antyzero.awesome.tools.IntentUtils;
 import com.antyzero.awesome.ui.adapter.RssAdapter;
 import com.google.code.rome.android.repackaged.com.sun.syndication.feed.rss.Channel;
 import com.google.code.rome.android.repackaged.com.sun.syndication.feed.rss.Item;
 import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,16 +97,21 @@ public final class RssFragment extends ListViewFragment implements AdapterView.O
     /**
      * Wait for server response
      */
-    private class RssRequestListener implements RequestListener<Channel> {
+    private class RssRequestListener extends ExtendedRequestListener<Channel> {
 
         @Override
-        public void onRequestFailure( SpiceException spiceException ) {
+        protected void onFailure( SpiceException spiceException ) {
             Toast.makeText( getActivity(), R.string.request_failure_rss, Toast.LENGTH_SHORT ).show();
         }
 
         @Override
-        public void onRequestSuccess( Channel channel ) {
+        protected void onSuccess( Channel channel ) {
             updateUi( channel.getItems() );
+        }
+
+        @Override
+        public void postResult() {
+            hideLoading();
         }
     }
 }

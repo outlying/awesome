@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.antyzero.awesome.R;
 
@@ -14,6 +15,8 @@ import com.antyzero.awesome.R;
 public abstract class ListViewFragment extends BaseFragment {
 
     private ListView listView;
+    private TextView textViewEmpty;
+    private View containerLoader;
 
     /**
      * {@inheritDoc}
@@ -30,7 +33,18 @@ public abstract class ListViewFragment extends BaseFragment {
     public void onViewCreated( View view, Bundle savedInstanceState ) {
 
         listView = (ListView) view.findViewById( R.id.listView );
-        listView.setEmptyView( view.findViewById( R.id.textViewEmpty ) );
+
+        textViewEmpty = (TextView) view.findViewById( R.id.textViewEmpty );
+
+        containerLoader = view.findViewById( R.id.containerLoader );
+    }
+
+    /**
+     * Hide loading and assign view to show when ListView is empty
+     */
+    protected void hideLoading(){
+        listView.setEmptyView( textViewEmpty );
+        containerLoader.setVisibility( View.GONE );
     }
 
     /**
