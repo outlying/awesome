@@ -18,6 +18,7 @@ import com.antyzero.awesome.ui.adapter.JsonAdapter;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -94,6 +95,9 @@ public final class JsonFragment extends ListViewFragment implements AdapterView.
 
         entries.clear();
         entries.addAll( entryList );
+
+        Collections.sort( entries, Entries.ORDER_DATE_DESC );
+
         jsonAdapter.notifyDataSetChanged();
     }
 

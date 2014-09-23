@@ -1,5 +1,7 @@
 package com.antyzero.awesome.network.response.pojo;
 
+import android.support.annotation.NonNull;
+
 import com.antyzero.awesome.domain.Constants;
 import com.antyzero.awesome.domain.json.DateTimeFormatting;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -18,7 +20,7 @@ import java.util.Comparator;
  * ...
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Entry implements Comparator<Entry> {
+public class Entry implements Comparable<Entry> {
 
     // We will use this for better date-time management
     private DateTime dateTime = DateTime.now();
@@ -112,8 +114,8 @@ public class Entry implements Comparator<Entry> {
      * {@inheritDoc}
      */
     @Override
-    public int compare( Entry lhs, Entry rhs ) {
-        return (int) Math.signum( rhs.dateTime.getMillis() - lhs.dateTime.getMillis() );
+    public int compareTo( @NonNull Entry another ) {
+        return (int) Math.signum( this.dateTime.getMillis() - another.dateTime.getMillis() );
     }
 
     /**
