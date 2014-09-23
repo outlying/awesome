@@ -48,7 +48,7 @@ public class JsonAdapter extends BaseAdapter {
 
         if( convertView == null ) {
 
-            convertView = layoutInflater.inflate( R.layout.adapter_json, parent, false );
+            convertView = layoutInflater.inflate( R.layout.adapter_news_item, parent, false );
 
             viewHolder = new ViewHolder( convertView );
             convertView.setTag( viewHolder );

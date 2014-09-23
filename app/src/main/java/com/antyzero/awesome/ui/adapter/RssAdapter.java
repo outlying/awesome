@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.antyzero.awesome.R;
+import com.antyzero.awesome.domain.json.DateTimeFormatting;
 import com.google.code.rome.android.repackaged.com.sun.syndication.feed.rss.Item;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class RssAdapter extends BaseAdapter {
 
         if( convertView == null ) {
 
-            convertView = layoutInflater.inflate( R.layout.adapter_rss, parent, false );
+            convertView = layoutInflater.inflate( R.layout.adapter_news_item, parent, false );
 
             viewHolder = new ViewHolder( convertView );
             convertView.setTag( viewHolder );
@@ -59,6 +60,8 @@ public class RssAdapter extends BaseAdapter {
         Item item = getItem( position );
 
         viewHolder.textViewTitle.setText( item.getTitle() );
+        viewHolder.textViewDescription.setText( item.getDescription().getValue() );
+        //viewHolder.textViewDateTime.setText( DateTimeFormatting.DATE_TIME.print( entry.getDateTime() ) );
 
         return convertView;
     }
@@ -69,10 +72,14 @@ public class RssAdapter extends BaseAdapter {
     private static final class ViewHolder {
 
         private final TextView textViewTitle;
+        private final TextView textViewDescription;
+        private final TextView textViewDateTime;
 
         public ViewHolder( View view ) {
 
             textViewTitle = (TextView) view.findViewById( R.id.textViewTitle );
+            textViewDescription = (TextView) view.findViewById( R.id.textViewDescription );
+            textViewDateTime = (TextView) view.findViewById( R.id.textViewDateTime );
         }
     }
 }
