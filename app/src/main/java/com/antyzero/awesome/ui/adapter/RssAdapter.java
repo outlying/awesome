@@ -20,9 +20,9 @@ public class RssAdapter extends BaseAdapter {
     private final LayoutInflater layoutInflater;
     private final List<Item> itemList;
 
-    public RssAdapter(Context context, List<Item> itemList) {
+    public RssAdapter( Context context, List<Item> itemList ) {
         this.itemList = itemList;
-        layoutInflater = LayoutInflater.from(context);
+        layoutInflater = LayoutInflater.from( context );
     }
 
     @Override
@@ -31,34 +31,34 @@ public class RssAdapter extends BaseAdapter {
     }
 
     @Override
-    public Item getItem(int position) {
-        return itemList.get(position);
+    public Item getItem( int position ) {
+        return itemList.get( position );
     }
 
     @Override
-    public long getItemId(int position) {
-        return getItem(position).getGuid().hashCode();
+    public long getItemId( int position ) {
+        return getItem( position ).getGuid().hashCode();
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView( int position, View convertView, ViewGroup parent ) {
 
         ViewHolder viewHolder;
 
-        if(convertView == null){
+        if( convertView == null ) {
 
-            convertView = layoutInflater.inflate(R.layout.adapter_rss, parent, false);
+            convertView = layoutInflater.inflate( R.layout.adapter_rss, parent, false );
 
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
+            viewHolder = new ViewHolder( convertView );
+            convertView.setTag( viewHolder );
         } else {
 
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Item item = getItem(position);
+        Item item = getItem( position );
 
-        viewHolder.textViewTitle.setText(item.getTitle());
+        viewHolder.textViewTitle.setText( item.getTitle() );
 
         return convertView;
     }
@@ -70,9 +70,9 @@ public class RssAdapter extends BaseAdapter {
 
         private final TextView textViewTitle;
 
-        public ViewHolder(View view) {
+        public ViewHolder( View view ) {
 
-            textViewTitle = (TextView) view.findViewById(R.id.textViewTitle);
+            textViewTitle = (TextView) view.findViewById( R.id.textViewTitle );
         }
     }
 }

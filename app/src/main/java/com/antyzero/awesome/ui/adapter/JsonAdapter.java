@@ -45,20 +45,20 @@ public class JsonAdapter extends BaseAdapter {
 
         ViewHolder viewHolder;
 
-        if(convertView == null){
+        if( convertView == null ) {
 
-            convertView = layoutInflater.inflate(R.layout.adapter_json, parent, false);
+            convertView = layoutInflater.inflate( R.layout.adapter_json, parent, false );
 
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
+            viewHolder = new ViewHolder( convertView );
+            convertView.setTag( viewHolder );
         } else {
 
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Entry entry = getItem(position);
+        Entry entry = getItem( position );
 
-        viewHolder.textViewTitle.setText(entry.getTitle());
+        viewHolder.textViewTitle.setText( entry.getTitle() );
 
         return convertView;
     }
@@ -70,9 +70,9 @@ public class JsonAdapter extends BaseAdapter {
 
         private final TextView textViewTitle;
 
-        public ViewHolder(View view) {
+        public ViewHolder( View view ) {
 
-            textViewTitle = (TextView) view.findViewById(R.id.textViewTitle);
+            textViewTitle = (TextView) view.findViewById( R.id.textViewTitle );
         }
     }
 }

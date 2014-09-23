@@ -20,6 +20,6 @@ public class JsonRequest extends SpringAndroidSpiceRequest<JsonResponse> {
 
     @Override
     public JsonResponse loadDataFromNetwork() throws Exception {
-        return getRestTemplate().getForObject(URL, getResultType() );
+        return getRestTemplate().getForObject( URL, getResultType() );
     }
 }

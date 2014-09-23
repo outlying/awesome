@@ -15,11 +15,11 @@ public class RssRequest extends SpringAndroidSpiceRequest<Channel> {
     public static final long CACHE_EXPIRY_DURATION = 60_000l;
 
     public RssRequest() {
-        super(Channel.class);
+        super( Channel.class );
     }
 
     @Override
     public Channel loadDataFromNetwork() throws Exception {
-        return getRestTemplate().getForObject(URL, Channel.class);
+        return getRestTemplate().getForObject( URL, Channel.class );
     }
 }

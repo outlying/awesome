@@ -2,16 +2,13 @@ package com.antyzero.awesome.ui.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.antyzero.awesome.R;
 import com.antyzero.awesome.network.request.RssRequest;
-import com.antyzero.awesome.network.response.pojo.Entry;
 import com.antyzero.awesome.tools.IntentUtils;
 import com.antyzero.awesome.ui.adapter.RssAdapter;
 import com.google.code.rome.android.repackaged.com.sun.syndication.feed.rss.Channel;
@@ -50,34 +47,34 @@ public final class RssFragment extends ListViewFragment implements AdapterView.O
 
         getSpiceManager().execute(
                 new RssRequest(),
-                new RssRequestListener());
+                new RssRequestListener() );
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated( View view, Bundle savedInstanceState ) {
+        super.onViewCreated( view, savedInstanceState );
 
         final ListView listView = getListView();
 
-        listView.setAdapter(rssAdapter);
-        listView.setOnItemClickListener(this);
+        listView.setAdapter( rssAdapter );
+        listView.setOnItemClickListener( this );
     }
 
     /**
      * Move to RSS entry news
-     *
+     * <p/>
      * {@inheritDoc}
      */
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
 
-        Item item = rssAdapter.getItem(position);
+        Item item = rssAdapter.getItem( position );
 
-        if(!IntentUtils.webBrowser(getActivity(), item.getLink())){
-            Toast.makeText(getActivity(), R.string.error_missing_application_web, Toast.LENGTH_SHORT).show();
+        if( !IntentUtils.webBrowser( getActivity(), item.getLink() ) ) {
+            Toast.makeText( getActivity(), R.string.error_missing_application_web, Toast.LENGTH_SHORT ).show();
         }
     }
 
@@ -104,7 +101,7 @@ public final class RssFragment extends ListViewFragment implements AdapterView.O
 
         @Override
         public void onRequestFailure( SpiceException spiceException ) {
-            Toast.makeText(getActivity(), R.string.request_failure_rss, Toast.LENGTH_SHORT).show();
+            Toast.makeText( getActivity(), R.string.request_failure_rss, Toast.LENGTH_SHORT ).show();
         }
 
         @Override

@@ -3,7 +3,6 @@ package com.antyzero.awesome.network.response.pojo;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import org.joda.time.DateTime;
 
@@ -12,22 +11,22 @@ import java.util.Comparator;
 /**
  * ...
  */
-@JsonIgnoreProperties( ignoreUnknown = true )
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Entry implements Comparator<Entry> {
 
     // We will use this for better date-time management
     private DateTime dateTime = null;
 
-    @JsonProperty( required = true )
+    @JsonProperty(required = true)
     private String title;
 
-    @JsonProperty( required = true )
+    @JsonProperty(required = true)
     private String link;
 
-    @JsonProperty( required = true )
+    @JsonProperty(required = true)
     private String date;
 
-    @JsonProperty( required = true )
+    @JsonProperty(required = true)
     private String time;
 
     @JsonProperty
@@ -61,16 +60,16 @@ public class Entry implements Comparator<Entry> {
     }
 
     @JsonCreator
-    @JsonProperty( value = "time" )
-    public void deserializeTime( String time ){
+    @JsonProperty(value = "time")
+    public void deserializeTime( String time ) {
 
-        if(dateTime == null){
+        if( dateTime == null ) {
             dateTime = DateTime.now();
         }
     }
 
     @Override
-    public int compare(Entry lhs, Entry rhs) {
+    public int compare( Entry lhs, Entry rhs ) {
         return 0;
     }
 
@@ -78,16 +77,16 @@ public class Entry implements Comparator<Entry> {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals( Object o ) {
+        if( this == o ) return true;
+        if( o == null || getClass() != o.getClass() ) return false;
 
         Entry entry = (Entry) o;
 
-        if (!date.equals(entry.date)) return false;
-        if (!link.equals(entry.link)) return false;
-        if (!time.equals(entry.time)) return false;
-        if (!title.equals(entry.title)) return false;
+        if( !date.equals( entry.date ) ) return false;
+        if( !link.equals( entry.link ) ) return false;
+        if( !time.equals( entry.time ) ) return false;
+        if( !title.equals( entry.title ) ) return false;
 
         return true;
     }

@@ -1,12 +1,8 @@
 package com.antyzero.awesome.ui.fragment;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -46,13 +42,13 @@ public final class JsonFragment extends ListViewFragment implements AdapterView.
      * {@inheritDoc}
      */
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated( View view, Bundle savedInstanceState ) {
+        super.onViewCreated( view, savedInstanceState );
 
         final ListView listView = getListView();
 
         listView.setAdapter( jsonAdapter );
-        listView.setOnItemClickListener(this);
+        listView.setOnItemClickListener( this );
     }
 
     /**
@@ -66,21 +62,21 @@ public final class JsonFragment extends ListViewFragment implements AdapterView.
                 new JsonRequest(),
                 JsonRequest.URL,
                 JsonRequest.CACHE_EXPIRY_DURATION,
-                new JsonRequestListener());
+                new JsonRequestListener() );
     }
 
     /**
      * Response to ListView item click
-     *
+     * <p/>
      * {@inheritDoc}
      */
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
 
-        Entry entry = jsonAdapter.getItem(position);
+        Entry entry = jsonAdapter.getItem( position );
 
-        if(!IntentUtils.webBrowser(getActivity(), entry.getLink())){
-            Toast.makeText(getActivity(), R.string.error_missing_application_web, Toast.LENGTH_SHORT).show();
+        if( !IntentUtils.webBrowser( getActivity(), entry.getLink() ) ) {
+            Toast.makeText( getActivity(), R.string.error_missing_application_web, Toast.LENGTH_SHORT ).show();
         }
     }
 
@@ -107,7 +103,7 @@ public final class JsonFragment extends ListViewFragment implements AdapterView.
 
         @Override
         public void onRequestFailure( SpiceException spiceException ) {
-            Toast.makeText(getActivity(),R.string.request_failure_json, Toast.LENGTH_SHORT).show();
+            Toast.makeText( getActivity(), R.string.request_failure_json, Toast.LENGTH_SHORT ).show();
         }
 
         @Override
