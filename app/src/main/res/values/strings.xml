@@ -6,6 +6,11 @@
     <string name="main_navigation_tab_log">Log</string>
     <string name="main_navigation_tab_rss">RSS</string>
     <string name="main_navigation_tab_json">JSON</string>
-    <string name="request_failure_json">Unable to downoad JSON feed</string>
+
+    <string name="request_failure_json">Unable to download JSON feed</string>
+    <string name="request_failure_rss">Unable to download RSS feed</string>
+
+    <string name="error_missing_application_web">Web browser not found</string>
+    <string name="empty_list_text">No items to display</string>
 
 </resources>

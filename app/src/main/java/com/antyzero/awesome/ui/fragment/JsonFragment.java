@@ -8,16 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.antyzero.awesome.Constants;
 import com.antyzero.awesome.R;
 import com.antyzero.awesome.network.request.JsonRequest;
 import com.antyzero.awesome.network.response.JsonResponse;
 import com.antyzero.awesome.network.response.pojo.Entries;
 import com.antyzero.awesome.network.response.pojo.Entry;
+import com.antyzero.awesome.tools.IntentUtils;
 import com.antyzero.awesome.ui.adapter.JsonAdapter;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -27,9 +26,7 @@ import java.util.List;
 /**
  * ...
  */
-public final class JsonFragment extends BaseFragment implements AdapterView.OnItemClickListener {
-
-    private ListView listView;
+public final class JsonFragment extends ListViewFragment implements AdapterView.OnItemClickListener {
 
     private JsonAdapter jsonAdapter;
 
@@ -49,17 +46,10 @@ public final class JsonFragment extends BaseFragment implements AdapterView.OnIt
      * {@inheritDoc}
      */
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
-        return inflater.inflate( R.layout.fragment_json, container, false );
-    }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onViewCreated( View view, Bundle savedInstanceState ) {
-
-        listView = (ListView) view.findViewById( R.id.listView );
+        final ListView listView = getListView();
 
         listView.setAdapter( jsonAdapter );
         listView.setOnItemClickListener(this);
@@ -89,8 +79,9 @@ public final class JsonFragment extends BaseFragment implements AdapterView.OnIt
 
         Entry entry = jsonAdapter.getItem(position);
 
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(entry.getLink()));
-        startActivity(browserIntent);
+        if(!IntentUtils.webBrowser(getActivity(), entry.getLink())){
+            Toast.makeText(getActivity(), R.string.error_missing_application_web, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
