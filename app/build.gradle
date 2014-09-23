@@ -82,6 +82,8 @@ dependencies {
 
     compile 'com.google.code.android-rome-feed-reader:android-rome-feed-reader:1.0.0-r2'
 
+    compile 'joda-time:joda-time:2.3'
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     // Testing
