@@ -1,4 +1,4 @@
-package com.antyzero.awesome.domain.json;
+package com.antyzero.awesome.domain;
 
 import com.antyzero.awesome.domain.Constants;
 

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.antyzero.awesome.R;
 import com.antyzero.awesome.network.ExtendedRequestListener;
 import com.antyzero.awesome.network.request.RssRequest;
+import com.antyzero.awesome.network.response.pojo.Entries;
 import com.antyzero.awesome.tools.IntentUtils;
 import com.antyzero.awesome.ui.adapter.RssAdapter;
 import com.google.code.rome.android.repackaged.com.sun.syndication.feed.rss.Channel;
@@ -17,6 +18,8 @@ import com.google.code.rome.android.repackaged.com.sun.syndication.feed.rss.Item
 import com.octo.android.robospice.persistence.exception.SpiceException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -89,6 +92,8 @@ public final class RssFragment extends ListViewFragment implements AdapterView.O
             return;
         }
 
+        Collections.sort( items, ORDER_DATE_DESC );
+
         itemList.clear();
         itemList.addAll( items );
         rssAdapter.notifyDataSetChanged();
@@ -114,4 +119,14 @@ public final class RssFragment extends ListViewFragment implements AdapterView.O
             hideLoading();
         }
     }
+
+    /**
+     * Order items with newest first
+     */
+    private static final Comparator<Item> ORDER_DATE_DESC = new Comparator<Item>() {
+        @Override
+        public int compare( Item lhs, Item rhs ) {
+            return (int) (lhs.getPubDate().getTime() - rhs.getPubDate().getTime());
+        }
+    };
 }

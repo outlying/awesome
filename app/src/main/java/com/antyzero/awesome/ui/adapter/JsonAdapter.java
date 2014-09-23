@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.antyzero.awesome.R;
-import com.antyzero.awesome.domain.json.DateTimeFormatting;
+import com.antyzero.awesome.domain.DateTimeFormatting;
 import com.antyzero.awesome.network.response.pojo.Entries;
 import com.antyzero.awesome.network.response.pojo.Entry;
 

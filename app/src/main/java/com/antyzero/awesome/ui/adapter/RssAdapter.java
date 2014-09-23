@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.antyzero.awesome.R;
-import com.antyzero.awesome.domain.json.DateTimeFormatting;
+import com.antyzero.awesome.domain.DateTimeFormatting;
 import com.google.code.rome.android.repackaged.com.sun.syndication.feed.rss.Item;
 
 import java.util.List;
@@ -59,9 +59,11 @@ public class RssAdapter extends BaseAdapter {
 
         Item item = getItem( position );
 
+        String dateTime = DateTimeFormatting.DATE_TIME.print( item.getPubDate().getTime() );
+
         viewHolder.textViewTitle.setText( item.getTitle() );
         viewHolder.textViewDescription.setText( item.getDescription().getValue() );
-        //viewHolder.textViewDateTime.setText( DateTimeFormatting.DATE_TIME.print( entry.getDateTime() ) );
+        viewHolder.textViewDateTime.setText( dateTime );
 
         return convertView;
     }

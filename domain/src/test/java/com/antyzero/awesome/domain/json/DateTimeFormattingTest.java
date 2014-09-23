@@ -1,5 +1,7 @@
 package com.antyzero.awesome.domain.json;
 
+import com.antyzero.awesome.domain.DateTimeFormatting;
+
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
