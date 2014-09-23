@@ -16,6 +16,7 @@ import com.antyzero.awesome.network.request.JsonRequest;
 import com.antyzero.awesome.network.response.JsonResponse;
 import com.antyzero.awesome.network.response.pojo.Entries;
 import com.antyzero.awesome.network.response.pojo.Entry;
+import com.antyzero.awesome.tools.IntentUtils;
 import com.antyzero.awesome.ui.adapter.JsonAdapter;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -87,11 +88,7 @@ public final class JsonFragment extends BaseFragment implements AdapterView.OnIt
 
         Entry entry = jsonAdapter.getItem(position);
 
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(entry.getLink()));
-
-        if (browserIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(browserIntent);
-        } else {
+        if(!IntentUtils.webBrowser(getActivity(), entry.getLink())){
             Toast.makeText(getActivity(), R.string.error_missing_application_web, Toast.LENGTH_SHORT).show();
         }
     }
