@@ -1,7 +1,5 @@
 package com.antyzero.awesome.domain;
 
-import com.antyzero.awesome.domain.Constants;
-
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 

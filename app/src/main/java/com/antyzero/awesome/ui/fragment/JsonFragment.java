@@ -16,7 +16,6 @@ import com.antyzero.awesome.network.response.pojo.Entry;
 import com.antyzero.awesome.tools.IntentUtils;
 import com.antyzero.awesome.ui.adapter.JsonAdapter;
 import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.util.Collections;
 import java.util.List;

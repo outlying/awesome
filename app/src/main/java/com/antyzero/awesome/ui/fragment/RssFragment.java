@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.antyzero.awesome.R;
 import com.antyzero.awesome.network.ExtendedRequestListener;
 import com.antyzero.awesome.network.request.RssRequest;
-import com.antyzero.awesome.network.response.pojo.Entries;
 import com.antyzero.awesome.tools.IntentUtils;
 import com.antyzero.awesome.ui.adapter.RssAdapter;
 import com.google.code.rome.android.repackaged.com.sun.syndication.feed.rss.Channel;
