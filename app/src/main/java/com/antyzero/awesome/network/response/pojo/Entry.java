@@ -108,9 +108,12 @@ public class Entry implements Comparator<Entry> {
                 localDate.getDayOfMonth() );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int compare( Entry lhs, Entry rhs ) {
-        throw new UnsupportedOperationException( "Not yet implemented" );
+        return (int) Math.signum( rhs.dateTime.getMillis() - lhs.dateTime.getMillis() );
     }
 
     /**
