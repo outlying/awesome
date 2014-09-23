@@ -1,7 +1,6 @@
 package com.antyzero.awesome.ui.fragment;
 
 import android.app.Fragment;
-import android.os.Bundle;
 
 import com.antyzero.awesome.network.AwesomeSpiceService;
 import com.octo.android.robospice.SpiceManager;
@@ -20,7 +19,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        spiceManager.start(getActivity());
+        spiceManager.start( getActivity() );
     }
 
     @Override

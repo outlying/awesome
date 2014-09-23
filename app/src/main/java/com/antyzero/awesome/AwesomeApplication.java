@@ -14,10 +14,10 @@ public class AwesomeApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        if (!BuildConfig.DEBUG) {
+        if( !BuildConfig.DEBUG ) {
 
             // Disable RoboSpice logging
-            Ln.getConfig().setLoggingLevel(Log.ERROR);
+            Ln.getConfig().setLoggingLevel( Log.ERROR );
         }
     }
 }

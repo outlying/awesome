@@ -9,36 +9,36 @@ import android.widget.TextView;
 
 import com.antyzero.awesome.R;
 import com.antyzero.awesome.domain.DateTimeFormatting;
-import com.antyzero.awesome.network.response.pojo.Entries;
-import com.antyzero.awesome.network.response.pojo.Entry;
+import com.google.code.rome.android.repackaged.com.sun.syndication.feed.rss.Item;
+
+import java.util.List;
 
 /**
- * Adapter for JSON data feed items
+ *
  */
-public class JsonAdapter extends BaseAdapter {
+public class RssAdapter extends BaseAdapter {
 
     private final LayoutInflater layoutInflater;
+    private final List<Item> itemList;
 
-    private final Entries entries;
-
-    public JsonAdapter( Context context, Entries entries ) {
-        this.entries = entries;
+    public RssAdapter( Context context, List<Item> itemList ) {
+        this.itemList = itemList;
         layoutInflater = LayoutInflater.from( context );
     }
 
     @Override
     public int getCount() {
-        return entries.size();
+        return itemList.size();
     }
 
     @Override
-    public Entry getItem( int position ) {
-        return entries.get( position );
+    public Item getItem( int position ) {
+        return itemList.get( position );
     }
 
     @Override
     public long getItemId( int position ) {
-        return getItem( position ).hashCode();
+        return getItem( position ).getGuid().hashCode();
     }
 
     @Override
@@ -57,11 +57,13 @@ public class JsonAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Entry entry = getItem( position );
+        Item item = getItem( position );
 
-        viewHolder.textViewTitle.setText( entry.getTitle() );
-        viewHolder.textViewDescription.setText( entry.getDescription() );
-        viewHolder.textViewDateTime.setText( DateTimeFormatting.DATE_TIME.print( entry.getDateTime() ) );
+        String dateTime = DateTimeFormatting.DATE_TIME.print( item.getPubDate().getTime() );
+
+        viewHolder.textViewTitle.setText( item.getTitle() );
+        viewHolder.textViewDescription.setText( item.getDescription().getValue() );
+        viewHolder.textViewDateTime.setText( dateTime );
 
         return convertView;
     }

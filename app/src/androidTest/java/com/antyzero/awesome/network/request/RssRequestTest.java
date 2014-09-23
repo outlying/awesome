@@ -1,17 +1,17 @@
 package com.antyzero.awesome.network.request;
 
-import com.antyzero.awesome.network.response.JsonResponse;
+import com.google.code.rome.android.repackaged.com.sun.syndication.feed.rss.Channel;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class JsonRequestTest extends RequestTestCase {
+public class RssRequestTest extends RequestTestCase {
 
     public void testLoadDataFromNetwork() throws Exception {
 
-        JsonRequest request = new JsonRequest();
+        RssRequest request = new RssRequest();
         request.setRestTemplate(getRestTemplate());
 
-        JsonResponse response = request.loadDataFromNetwork();
+        Channel response = request.loadDataFromNetwork();
 
         assertThat(response).isNotNull();
     }
