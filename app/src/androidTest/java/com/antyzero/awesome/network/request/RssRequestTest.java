@@ -11,7 +11,7 @@ public class RssRequestTest extends RequestTestCase {
         RssRequest request = new RssRequest();
         request.setRestTemplate(getRestTemplate());
 
-        Channel response = request.loadDataFromNetwork();
+        Object response = request.loadDataFromNetwork();
 
         assertThat(response).isNotNull();
     }

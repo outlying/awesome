@@ -20,6 +20,6 @@ public class RssRequest extends SpringAndroidSpiceRequest<Channel> {
 
     @Override
     public Channel loadDataFromNetwork() throws Exception {
-        return null;
+        return getRestTemplate().getForObject(URL, Channel.class);
     }
 }
