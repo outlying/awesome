@@ -26,9 +26,7 @@ import java.util.List;
 /**
  * ...
  */
-public final class JsonFragment extends BaseFragment implements AdapterView.OnItemClickListener {
-
-    private ListView listView;
+public final class JsonFragment extends ListViewFragment implements AdapterView.OnItemClickListener {
 
     private JsonAdapter jsonAdapter;
 
@@ -48,17 +46,10 @@ public final class JsonFragment extends BaseFragment implements AdapterView.OnIt
      * {@inheritDoc}
      */
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
-        return inflater.inflate( R.layout.fragment_json, container, false );
-    }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onViewCreated( View view, Bundle savedInstanceState ) {
-
-        listView = (ListView) view.findViewById( R.id.listView );
+        final ListView listView = getListView();
 
         listView.setAdapter( jsonAdapter );
         listView.setOnItemClickListener(this);

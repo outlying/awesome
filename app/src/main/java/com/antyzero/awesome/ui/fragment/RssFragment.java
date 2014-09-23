@@ -25,9 +25,7 @@ import java.util.List;
 /**
  *
  */
-public final class RssFragment extends BaseFragment implements AdapterView.OnItemClickListener {
-
-    private ListView listView;
+public final class RssFragment extends ListViewFragment implements AdapterView.OnItemClickListener {
 
     private final List<Item> itemList = new ArrayList<>();
 
@@ -47,34 +45,25 @@ public final class RssFragment extends BaseFragment implements AdapterView.OnIte
      * {@inheritDoc}
      */
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
-        return inflater.inflate( R.layout.fragment_json, container, false );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onViewCreated( View view, Bundle savedInstanceState ) {
-
-        listView = (ListView) view.findViewById( R.id.listView );
-
-        listView.setAdapter( rssAdapter );
-        listView.setOnItemClickListener(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onStart() {
         super.onStart();
 
-        getSpiceManager().getFromCacheAndLoadFromNetworkIfExpired(
+        getSpiceManager().execute(
                 new RssRequest(),
-                RssRequest.URL,
-                RssRequest.CACHE_EXPIRY_DURATION,
                 new RssRequestListener());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        final ListView listView = getListView();
+
+        listView.setAdapter(rssAdapter);
+        listView.setOnItemClickListener(this);
     }
 
     /**
