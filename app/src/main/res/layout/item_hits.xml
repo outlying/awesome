@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/gap_small"
+    tools:background="@android:color/darker_gray">
+
+    <View
+        android:id="@+id/viewPercent"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_green_dark"
+        tools:layout_width="100dp" />
+
+    <TextView
+        android:id="@+id/textViewCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="22sp"
+        tools:text="45"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@id/textViewCounter"
+        android:layout_toStartOf="@id/textViewCounter"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/primary_text_light"
+            android:textSize="16sp"
+            tools:text="Some simple title" />
+
+        <TextView
+            android:id="@+id/textViewSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:text="Some useless subtitle"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

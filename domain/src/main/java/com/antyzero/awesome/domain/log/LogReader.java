@@ -19,7 +19,7 @@ import static com.antyzero.awesome.domain.MapUtil.Order.DESCENDING;
 /**
  *
  */
-public class LogParser {
+public class LogReader {
 
     private static final String REGEX_LINE = "(\\d{1,3}(?:\\.\\d{1,3}){3}).+?(\\w+:\\/\\/.+?)\\s";
 
@@ -30,7 +30,7 @@ public class LogParser {
      *
      * @throws java.io.IOException
      */
-    public static void read( InputStream inputStream ) throws IOException {
+    public static AnalyzeResult analyze(InputStream inputStream) throws IOException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line = reader.readLine();
@@ -60,7 +60,7 @@ public class LogParser {
         hostHits = MapUtil.sortByValue( hostHits, DESCENDING );
         urlHits = MapUtil.sortByValue( urlHits, DESCENDING );
 
-        hostHits.toString();
+        return new AnalyzeResult(hostHits,urlHits);
     }
 
     /**
@@ -78,4 +78,25 @@ public class LogParser {
         }
     }
 
+    /**
+     * Aggregates analyze results
+     */
+    public static final class AnalyzeResult {
+
+        private final Map<String,Integer> hostHits;
+        private final Map<String,Integer> urlHits;
+
+        private AnalyzeResult(Map<String,Integer> hostHits,Map<String,Integer> urlHits){
+            this.hostHits = hostHits;
+            this.urlHits = urlHits;
+        }
+
+        public Map<String, Integer> getHostHits() {
+            return hostHits;
+        }
+
+        public Map<String, Integer> getUrlHits() {
+            return urlHits;
+        }
+    }
 }

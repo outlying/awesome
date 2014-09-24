@@ -13,5 +13,8 @@
     <string name="error_missing_application_web">Web browser not found</string>
     <string name="empty_list_text">No items to display</string>
     <string name="loading">Loading</string>
+    <string name="header_top_5_hosts">Top 5 hosts</string>
+    <string name="header_top_5_files">Top 5 files</string>
+    <string name="error_log_file">Unable to process log file</string>
 
 </resources>
