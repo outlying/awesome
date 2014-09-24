@@ -25,6 +25,8 @@ import static com.antyzero.awesome.domain.log.LogReader.AnalyzeResult;
 public final class LogFileFragment extends BaseFragment {
 
     private static final String TAG = "LogFileFragment";
+
+    // Maximum items
     public static final int MAXIMUM_ITEMS = 5;
 
     private ViewGroup containerHosts;
@@ -63,7 +65,7 @@ public final class LogFileFragment extends BaseFragment {
     /**
      * Update with new data
      *
-     * @param analyzeResult
+     * @param analyzeResult data source
      */
     private void updateUi(AnalyzeResult analyzeResult) {
 
@@ -71,33 +73,76 @@ public final class LogFileFragment extends BaseFragment {
             return;
         }
 
-        Map<String, Integer> hostHits = analyzeResult.getHostHits();
+        // Add host results
 
-        final int sizeHosts = Math.min(hostHits.size(), MAXIMUM_ITEMS);
+        updateResults( containerHosts, analyzeResult.getHostHits(), new ValueAssignCallback() {
+
+            float maxValue = 0f;
+
+            @Override
+            public void assign( ItemHits itemHits, Map.Entry<String, Integer> entry, int position ) {
+
+                if( position == 0 ) {
+                    maxValue = entry.getValue();
+                }
+
+                itemHits.setTitle( entry.getKey() );
+                itemHits.setCounter( String.valueOf( entry.getValue() ) );
+                itemHits.setPercent( ( (float) entry.getValue() ) / maxValue );
+            }
+        } );
+
+        // Add URL results
+
+        updateResults( containerFiles, analyzeResult.getUrlHits(), new ValueAssignCallback() {
+
+            float maxValue = 0f;
+
+            @Override
+            public void assign( ItemHits itemHits, Map.Entry<String, Integer> entry, int position ) {
+
+                if( position == 0 ) {
+                    maxValue = entry.getValue();
+                }
+
+                String url = entry.getKey();
+
+                itemHits.setTitle( "<file_name>" );
+                itemHits.setSubTitle( url );
+
+                itemHits.setCounter( String.valueOf( entry.getValue() ) );
+                itemHits.setPercent( ( (float) entry.getValue() ) / maxValue );
+            }
+        } );
+    }
+
+    /**
+     * Add results to given container
+     *
+     * @param container target container
+     * @param results map containing results to process
+     * @param callback for value assignment
+     */
+    private void updateResults( ViewGroup container, Map<String, Integer> results, ValueAssignCallback callback ){
+
+        final int sizeHosts = Math.min(results.size(), MAXIMUM_ITEMS);
 
         int i = 0;
 
-        float maxValue = 0f;
+        // Clear old results
+        container.removeAllViews();
 
-        for (Map.Entry<String, Integer> entry : hostHits.entrySet()) {
+        for (Map.Entry<String, Integer> entry : results.entrySet()) {
 
             if (i == sizeHosts) {
                 break;
             }
 
-            if (i == 0) {
-                maxValue = entry.getValue();
-            }
-
             ItemHits itemHits = new ItemHits(getActivity());
 
-            itemHits.setTitle(entry.getKey());
-            itemHits.setCounter(String.valueOf(entry.getValue()));
+            container.addView(itemHits);
 
-            containerHosts.addView(itemHits);
-
-            // Animate after adding to view hierarchy
-            itemHits.setPercent(((float) entry.getValue()) / maxValue);
+            callback.assign( itemHits, entry, i );
 
             i++;
         }
@@ -141,5 +186,20 @@ public final class LogFileFragment extends BaseFragment {
 
             Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * Callback for value assignment
+     */
+    private interface ValueAssignCallback {
+
+        /**
+         * Called after view is added to view hierarchy
+         *
+         * @param itemHits current view instance
+         * @param valueObject data source
+         * @param position which position is current
+         */
+        void assign( ItemHits itemHits, Map.Entry<String,Integer> valueObject, int position );
     }
 }

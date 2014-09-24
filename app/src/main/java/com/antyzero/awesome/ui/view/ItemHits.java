@@ -94,9 +94,7 @@ public class ItemHits extends RelativeLayout implements ValueAnimator.AnimatorUp
 
         Float percent = (Float) animation.getAnimatedValue();
 
-        final int newWidth = (int) (((float) getWidth()) * percent);
-
-        viewPercent.getLayoutParams().width = newWidth;
+        viewPercent.getLayoutParams().width = (int) (((float) getWidth()) * percent);
         viewPercent.requestLayout();
     }
 }

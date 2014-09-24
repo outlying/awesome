@@ -56,6 +56,8 @@
             android:textColor="@android:color/secondary_text_light"
             android:textSize="12sp"
             android:visibility="gone"
+            android:maxLines="2"
+            android:ellipsize="end"
             tools:text="Some useless subtitle"
             tools:visibility="visible" />
 
