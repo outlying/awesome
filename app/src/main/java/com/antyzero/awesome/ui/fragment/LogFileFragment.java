@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.antyzero.awesome.R;
 import com.antyzero.awesome.domain.log.LogReader;
 import com.antyzero.awesome.network.ExtendedRequestListener;
+import com.antyzero.awesome.ui.view.ItemHits;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.SpiceRequest;
 
@@ -82,7 +83,10 @@ public final class LogFileFragment extends BaseFragment {
                 break;
             }
 
+            ItemHits itemHits = new ItemHits(getActivity());
 
+            itemHits.setTitle(entry.getKey());
+            itemHits.setCounter(String.valueOf(entry.getValue()));
 
             i++;
         }
