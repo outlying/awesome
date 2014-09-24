@@ -20,6 +20,8 @@ import java.util.List;
  */
 public class AwesomeSpiceService extends SpringAndroidSpiceService {
 
+    public static final int DESIRED_THREAD_AMOUNT = 3;
+
     /**
      * {@inheritDoc}
      */
@@ -54,5 +56,16 @@ public class AwesomeSpiceService extends SpringAndroidSpiceService {
         restTemplate.setMessageConverters( listHttpMessageConverters );
 
         return restTemplate;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getThreadCount() {
+
+        int cores = Runtime.getRuntime().availableProcessors();
+
+        return Math.min( cores, DESIRED_THREAD_AMOUNT );
     }
 }
