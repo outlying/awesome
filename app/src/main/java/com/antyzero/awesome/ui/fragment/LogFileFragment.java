@@ -77,16 +77,25 @@ public final class LogFileFragment extends BaseFragment {
 
         int i = 0;
 
+        float maxValue = 0f;
+
         for (Map.Entry<String, Integer> entry : hostHits.entrySet()) {
 
             if (i == sizeHosts) {
                 break;
             }
 
+            if (i == 0) {
+                maxValue = entry.getValue();
+            }
+
             ItemHits itemHits = new ItemHits(getActivity());
 
             itemHits.setTitle(entry.getKey());
             itemHits.setCounter(String.valueOf(entry.getValue()));
+            itemHits.setPercent(((float) entry.getValue()) / maxValue);
+
+            containerHosts.addView(itemHits);
 
             i++;
         }

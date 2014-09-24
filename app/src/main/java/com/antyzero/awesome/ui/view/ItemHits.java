@@ -13,7 +13,7 @@ import com.antyzero.awesome.R;
 /**
  *
  */
-public class ItemHits extends RelativeLayout {
+public class ItemHits extends RelativeLayout implements ValueAnimator.AnimatorUpdateListener {
 
     private TextView textViewTitle;
     private TextView textViewSubTitle;
@@ -58,16 +58,16 @@ public class ItemHits extends RelativeLayout {
     }
 
     public void setTitle(CharSequence  title) {
-        this.textViewTitle.setText(title);
+        textViewTitle.setText(title);
     }
 
     public void setSubTitle(CharSequence subTitle) {
-        this.textViewSubTitle.setVisibility(VISIBLE);
-        this.textViewSubTitle.setText(subTitle);
+        textViewSubTitle.setVisibility(VISIBLE);
+        textViewSubTitle.setText(subTitle);
     }
 
     public void setCounter(CharSequence counter) {
-        this.textViewCounter.setText(counter);
+        textViewCounter.setText(counter);
     }
 
     /**
@@ -77,6 +77,24 @@ public class ItemHits extends RelativeLayout {
      */
     public void setPercent(float percent){
 
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, percent);
 
+        valueAnimator.addUpdateListener(this);
+        valueAnimator.start();
+    }
+
+    /**
+     * Bar animation
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void onAnimationUpdate(ValueAnimator animation) {
+
+        Float percent = (Float) animation.getAnimatedValue();
+
+        final int newWidth = (int) (((float) getWidth()) * percent);
+
+        viewPercent.getLayoutParams().width = newWidth;
     }
 }
