@@ -34,8 +34,8 @@ public final class LogFileFragment extends BaseFragment {
      * {@inheritDoc}
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onStart() {
+        super.onStart();
 
         getSpiceManager().execute(
                 new ProcessLog(getResources().openRawResource(R.raw.varnish)),
@@ -93,9 +93,11 @@ public final class LogFileFragment extends BaseFragment {
 
             itemHits.setTitle(entry.getKey());
             itemHits.setCounter(String.valueOf(entry.getValue()));
-            itemHits.setPercent(((float) entry.getValue()) / maxValue);
 
             containerHosts.addView(itemHits);
+
+            // Animate after adding to view hierarchy
+            itemHits.setPercent(((float) entry.getValue()) / maxValue);
 
             i++;
         }
