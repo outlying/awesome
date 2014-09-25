@@ -1,5 +1,6 @@
 package com.antyzero.awesome.ui.fragment;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.SpiceRequest;
 
 import java.io.InputStream;
+import java.net.URI;
+import java.util.List;
 import java.util.Map;
 
 import static com.antyzero.awesome.domain.log.LogReader.AnalyzeResult;
@@ -106,6 +109,9 @@ public final class LogFileFragment extends BaseFragment {
                 }
 
                 String url = entry.getKey();
+
+                List<String> segments = Uri.parse( url ).getPathSegments();
+                
 
                 itemHits.setTitle( "<file_name>" );
                 itemHits.setSubTitle( url );
