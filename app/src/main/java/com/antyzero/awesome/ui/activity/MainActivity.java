@@ -23,7 +23,7 @@ import com.antyzero.awesome.ui.fragment.RssFragment;
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
+    private ViewPager viewPager;
     private ActionBar actionBar;
 
     /**
@@ -44,9 +44,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
         mSectionsPagerAdapter = new SectionsPagerAdapter( getFragmentManager() );
 
-        mViewPager = (ViewPager) findViewById( R.id.pager );
-        mViewPager.setAdapter( mSectionsPagerAdapter );
-        mViewPager.setOnPageChangeListener( new OnPageChangeListener() );
+        viewPager = (ViewPager) findViewById( R.id.pager );
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setAdapter(mSectionsPagerAdapter);
+        viewPager.setOnPageChangeListener(new OnPageChangeListener());
 
         for( int i = 0; i < mSectionsPagerAdapter.getCount(); i++ ) {
 
@@ -61,7 +62,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
      */
     @Override
     public void onTabSelected( ActionBar.Tab tab, FragmentTransaction fragmentTransaction ) {
-        mViewPager.setCurrentItem( tab.getPosition() );
+        viewPager.setCurrentItem(tab.getPosition());
     }
 
     /**
