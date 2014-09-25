@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.antyzero.awesome.R;
+import com.antyzero.awesome.domain.UrlUtil;
 import com.antyzero.awesome.domain.log.LogReader;
 import com.antyzero.awesome.network.ExtendedRequestListener;
 import com.antyzero.awesome.ui.view.ItemHits;
@@ -110,10 +111,9 @@ public final class LogFileFragment extends BaseFragment {
 
                 String url = entry.getKey();
 
-                List<String> segments = Uri.parse( url ).getPathSegments();
-                
+                String fileName = UrlUtil.fileName(url, getString(R.string.unknown_file_name));
 
-                itemHits.setTitle( "<file_name>" );
+                itemHits.setTitle( fileName );
                 itemHits.setSubTitle( url );
 
                 itemHits.setCounter( String.valueOf( entry.getValue() ) );

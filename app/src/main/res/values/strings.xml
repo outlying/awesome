@@ -7,14 +7,19 @@
     <string name="main_navigation_tab_rss">RSS</string>
     <string name="main_navigation_tab_json">JSON</string>
 
+    <string name="empty_list_text">No items to display</string>
+
+    <string name="loading">Loading</string>
+
+    <string name="header_top_5_hosts">Top 5 hosts</string>
+    <string name="header_top_5_files">Top 5 files</string>
+
+    <string name="unknown_file_name"><![CDATA[<unknown_file_name>]]></string>
+
     <string name="request_failure_json">Unable to download JSON feed</string>
     <string name="request_failure_rss">Unable to download RSS feed</string>
 
     <string name="error_missing_application_web">Web browser not found</string>
-    <string name="empty_list_text">No items to display</string>
-    <string name="loading">Loading</string>
-    <string name="header_top_5_hosts">Top 5 hosts</string>
-    <string name="header_top_5_files">Top 5 files</string>
     <string name="error_log_file">Unable to process log file</string>
 
 </resources>

@@ -16,6 +16,15 @@ public final class MapUtil {
         throw new IllegalAccessError();
     }
 
+    /**
+     * Sort map by key value
+     *
+     * @param map to sort
+     * @param order desired order
+     * @param <K> type of key
+     * @param <V> type of value, has to implement Comparable
+     * @return sorted Map
+     */
     public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue( Map<K, V> map, Order order ) {
 
         List<Map.Entry<K, V>> list = new LinkedList<>( map.entrySet() );
