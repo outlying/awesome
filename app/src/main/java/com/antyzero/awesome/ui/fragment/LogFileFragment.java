@@ -1,6 +1,5 @@
 package com.antyzero.awesome.ui.fragment;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,12 +12,12 @@ import com.antyzero.awesome.domain.UrlUtil;
 import com.antyzero.awesome.domain.log.LogReader;
 import com.antyzero.awesome.network.ExtendedRequestListener;
 import com.antyzero.awesome.ui.view.ItemHits;
+import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.CachedSpiceRequest;
 import com.octo.android.robospice.request.SpiceRequest;
 
 import java.io.InputStream;
-import java.net.URI;
-import java.util.List;
 import java.util.Map;
 
 import static com.antyzero.awesome.domain.log.LogReader.AnalyzeResult;
@@ -44,7 +43,7 @@ public final class LogFileFragment extends BaseFragment {
         super.onStart();
 
         getSpiceManager().execute(
-                new ProcessLog(getResources().openRawResource(R.raw.varnish)),
+                new ProcessLogOffline(getResources().openRawResource(R.raw.varnish)),
                 new ProcessLogListener());
     }
 
@@ -151,6 +150,17 @@ public final class LogFileFragment extends BaseFragment {
             callback.assign( itemHits, entry, i );
 
             i++;
+        }
+    }
+
+    /**
+     * To avoid network errors
+     */
+    private static final class ProcessLogOffline extends CachedSpiceRequest<AnalyzeResult>{
+
+        public ProcessLogOffline(InputStream inputStream) {
+            super(new ProcessLog(inputStream), null, DurationInMillis.ALWAYS_EXPIRED);
+            setOffline(true);
         }
     }
 
